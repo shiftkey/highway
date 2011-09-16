@@ -41,7 +41,7 @@ namespace Highway.Models
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return Repositories.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

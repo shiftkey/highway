@@ -25,6 +25,7 @@ namespace Highway
         public static void ShowCollection()
         {
             var page = new CollectionPage();
+
             if (_sampleData == null) 
                 _sampleData = new GithubSampleRepository(page.BaseUri);
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,9 +38,7 @@ namespace Highway.SampleData
 
         public Collaborator GetCollaborator(string user)
         {
-            return new Collaborator()
-            {
-                Repositories = new System.Collections.ObjectModel.ObservableCollection<Repository>() { 
+            var repositories = new ObservableCollection<Repository>() { 
                 new Repository() { Name = "blog", ImageUri = new Uri(_baseUrl, "SampleData/Images/MediumGray.png") },
                 new Repository() { Name = "Highway" , ImageUri = new Uri(_baseUrl, "SampleData/Images/MediumGray.png") },
                 new Repository() { Name = "RestSharp" , ImageUri = new Uri(_baseUrl, "SampleData/Images/MediumGray.png") },
@@ -51,8 +50,9 @@ namespace Highway.SampleData
                 new Repository() { Name = "configatron" , ImageUri = new Uri(_baseUrl, "SampleData/Images/MediumGray.png") },
                 new Repository() { Name = "Albacore" , ImageUri = new Uri(_baseUrl, "SampleData/Images/MediumGray.png") },
                 new Repository() { Name = "rhino-mocks" , ImageUri = new Uri(_baseUrl, "SampleData/Images/MediumGray.png") },
-            }
             };
+
+            return new Collaborator() { Repositories = repositories };
         }
 
         public IEnumerable<Commit> GetCommitHistory(Repository repo)
