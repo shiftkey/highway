@@ -1,8 +1,9 @@
-﻿using Windows.UI.Xaml.Data;
+﻿using System.Collections.ObjectModel;
+using Windows.UI.Xaml.Data;
 
 namespace Highway.Models
 {
-    public class Collaborator : INotifyPropertyChanged
+    public class Collaborator : INotifyPropertyChanged, IGroupInfo
     {
         //    "owner": {
         //      "login": "octocat",
@@ -16,6 +17,8 @@ namespace Highway.Models
         public string AvatarUrl { get; set; }
         public string Url { get; set; }
 
+        public ObservableCollection<Repository> Repositories { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
@@ -24,6 +27,21 @@ namespace Highway.Models
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
+        }
+
+        public object Key
+        {
+            get { return this; }
+        }
+
+        public System.Collections.Generic.IEnumerator<object> GetEnumerator()
+        {
+            return Repositories.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return Repositories.GetEnumerator();
         }
     }
 }

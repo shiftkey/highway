@@ -8,8 +8,8 @@ namespace Highway.SampleData
 {
     public interface IRepository
     {
-        IEnumerable<Repository> GetRepositories(string user);
-
         IEnumerable<Commit> GetCommitHistory(Repository repo);
+
+        Collaborator GetCollaborator(string name);
     }
 }

@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Expression.Blend.SampleData.SampleDataSource;
-using Highway.SampleData;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace Highway.Models
 {
-    public class Repository : INotifyPropertyChanged, IGroupInfo
+    public class Repository : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -65,15 +60,13 @@ namespace Highway.Models
         public Collaborator Owner { get; set; }
 
         private ImageSource _image = null;
-        private Uri _imageBaseUri = null;
-        private String _imagePath = null;
         public ImageSource Image
         {
             get
             {
-                if (_image == null && _imageBaseUri != null && _imagePath != null)
+                if (_image == null && _imageUri != null)
                 {
-                    _image = new BitmapImage(new Uri(_imageBaseUri, _imagePath));
+                    _image = new BitmapImage(_imageUri);
                 }
                 return _image;
             }
@@ -83,34 +76,25 @@ namespace Highway.Models
                 if (_image != value)
                 {
                     _image = value;
-                    _imageBaseUri = null;
-                    _imagePath = null;
                     OnPropertyChanged("Image");
                 }
             }
         }
 
-        public void SetImage(Uri baseUri, String path)
+        private Uri _imageUri;
+        public Uri ImageUri
         {
-            _image = null;
-            _imageBaseUri = baseUri;
-            _imagePath = path;
-            OnPropertyChanged("Image");
-        }
+            get { return _imageUri; }
+            set
+            {
+                if (_imageUri != value)
+                {
+                    _imageUri = value;
+                    Image = null;
+                    OnPropertyChanged("ImageUri");
+                }
+            }
 
-        public object Key
-        {
-            get { return this; }
-        }
-
-        public IEnumerator<object> GetEnumerator()
-        {
-            return null;   
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
     }
 }

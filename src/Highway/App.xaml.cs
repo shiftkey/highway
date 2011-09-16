@@ -1,16 +1,15 @@
-﻿using Expression.Blend.SampleData.SampleDataSource;
-using System;
+﻿using System;
 using System.Linq;
+using Highway.SampleData;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using Highway.SampleData;
 
 namespace Highway
 {
     partial class App
     {
-        private static GithubRepository _sampleData;
+        private static IRepository _sampleData;
 
         public App()
         {
@@ -27,9 +26,9 @@ namespace Highway
         {
             var page = new CollectionPage();
             if (_sampleData == null) 
-                _sampleData = new GithubRepository(page.BaseUri);
+                _sampleData = new GithubSampleRepository(page.BaseUri);
 
-            page.Items = _sampleData.GetRepositories("").Select((obj) => (Object)obj);
+            page.Items = _sampleData.GetCollaborator("").Repositories;
             Window.Current.Content = page;
         }
 
@@ -37,10 +36,10 @@ namespace Highway
         {
             var page = new SplitPage();
             if (_sampleData == null)
-                _sampleData = new GithubRepository(page.BaseUri);
+                _sampleData = new GithubSampleRepository(page.BaseUri);
 
             if (collection == null) 
-                collection = _sampleData.GetRepositories("").First();
+                collection = _sampleData.GetCollaborator("");
 
             page.Items = collection;
             page.Context = collection.Key;
