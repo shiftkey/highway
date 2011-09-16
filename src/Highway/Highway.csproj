@@ -32,15 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="CollectionPage.xaml.cs">
       <DependentUpon>CollectionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Commit.cs" />
+    <Compile Include="Models\Contributor.cs" />
+    <Compile Include="Models\Repository.cs" />
+    <Compile Include="SampleData\GithubDataSource.cs" />
+    <Compile Include="SampleData\IRepository.cs" />
     <Compile Include="SplitPage.xaml.cs">
       <DependentUpon>SplitPage.xaml</DependentUpon>
     </Compile>
@@ -88,6 +90,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v1.0\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
