@@ -14,16 +14,16 @@ namespace Expression.Blend.SampleData.SampleDataSource
 	internal class SampleDataSource { }
 #else
 
-    class SampleDataCollection : SampleDataItem, IGroupInfo
+    class SampleDataCollection : Repository, IGroupInfo
     {
         public Object Key
         {
             get { return this; }
         }
 
-        private List<SampleDataItem> _itemCollection = new List<SampleDataItem>();
+        private List<Repository> _itemCollection = new List<Repository>();
 
-        public void Add(SampleDataItem item)
+        public void Add(Repository item)
         {
             _itemCollection.Add(item);
         }
@@ -39,7 +39,7 @@ namespace Expression.Blend.SampleData.SampleDataSource
         }
     }
 
-    class SampleDataItem : INotifyPropertyChanged
+    class Repository : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -50,6 +50,45 @@ namespace Expression.Blend.SampleData.SampleDataSource
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+
+        //        [
+        //  {
+        //    "url": "https://api.github.com/repos/octocat/Hello-World",
+        //    "html_url": "https://github.com/octocat/Hello-World",
+        //    "clone_url": "https://github.com/octocat/Hello-World.git",
+        //    "git_url": "git://github.com/octocat/Hello-World.git",
+        //    "ssh_url": "git@github.com:octocat/Hello-World.git",
+        //    "svn_url": "https://svn.github.com/octocat/Hello-World",
+        //    "owner": {
+        //      "login": "octocat",
+        //      "id": 1,
+        //      "avatar_url": "https://github.com/images/error/octocat_happy.gif",
+        //      "url": "https://api.github.com/users/octocat"
+        //    },
+        //    "name": "Hello-World",
+        //    "description": "This your first repo!",
+        //    "homepage": "https://github.com",
+        //    "language": null,
+        //    "private": false,
+        //    "fork": false,
+        //    "forks": 9,
+        //    "watchers": 80,
+        //    "size": 108,
+        //    "master_branch": "master",
+        //    "open_issues": 0,
+        //    "pushed_at": "2011-01-26T19:06:43Z",
+        //    "created_at": "2011-01-26T19:01:12Z"
+        //  }
+        //]
+
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string HomePage { get; set; }
+        public string CreatedAt { get; set; }
+        public string PushedAt { get; set; }
+
+        public Contributor Owner { get; set; } 
 
         private SampleDataCollection _collection;
         public SampleDataCollection Collection
@@ -65,42 +104,6 @@ namespace Expression.Blend.SampleData.SampleDataSource
                 {
                     this._collection = value;
                     this.OnPropertyChanged("Collection");
-                }
-            }
-        }
-
-        private string _title = string.Empty;
-        public string Title
-        {
-            get
-            {
-                return this._title;
-            }
-
-            set
-            {
-                if (this._title != value)
-                {
-                    this._title = value;
-                    this.OnPropertyChanged("Title");
-                }
-            }
-        }
-
-        private string _subtitle = string.Empty;
-        public string Subtitle
-        {
-            get
-            {
-                return this._subtitle;
-            }
-
-            set
-            {
-                if (this._subtitle != value)
-                {
-                    this._subtitle = value;
-                    this.OnPropertyChanged("Subtitle");
                 }
             }
         }
@@ -157,42 +160,6 @@ namespace Expression.Blend.SampleData.SampleDataSource
             }
         }
 
-        private string _category = string.Empty;
-        public string Category
-        {
-            get
-            {
-                return this._category;
-            }
-
-            set
-            {
-                if (this._category != value)
-                {
-                    this._category = value;
-                    this.OnPropertyChanged("Category");
-                }
-            }
-        }
-
-        private string _description = string.Empty;
-        public string Description
-        {
-            get
-            {
-                return this._description;
-            }
-
-            set
-            {
-                if (this._description != value)
-                {
-                    this._description = value;
-                    this.OnPropertyChanged("Description");
-                }
-            }
-        }
-
         private string _content = string.Empty;
         public string Content
         {
@@ -212,7 +179,7 @@ namespace Expression.Blend.SampleData.SampleDataSource
         }
     }
 
-    class SampleDataSource
+    class GitHubDataSource
     {
         public List<SampleDataCollection> GroupedCollections { get; private set; }
 
@@ -233,7 +200,7 @@ namespace Expression.Blend.SampleData.SampleDataSource
         {
             SampleDataCollection lastCollection = GroupedCollections.LastOrDefault() as SampleDataCollection;
 
-            var item = new SampleDataItem();
+            var item = new Repository();
             item.Title = title;
             item.Subtitle = subtitle;
             item.SetImage(baseUri, imagePath);
@@ -248,7 +215,7 @@ namespace Expression.Blend.SampleData.SampleDataSource
             }
         }
 
-        public SampleDataSource(Uri baseUri)
+        public GitHubDataSource(Uri baseUri)
         {
             String LONG_LOREM_IPSUM = String.Format("{0}\n\n{0}\n\n{0}\n\n{0}",
                         "Curabitur class aliquam vestibulum nam curae maecenas sed integer cras phasellus suspendisse quisque donec dis praesent accumsan bibendum pellentesque condimentum adipiscing etiam consequat vivamus dictumst aliquam duis convallis scelerisque est parturient ullamcorper aliquet fusce suspendisse nunc hac eleifend amet blandit facilisi condimentum commodo scelerisque faucibus aenean ullamcorper ante mauris dignissim consectetuer nullam lorem vestibulum habitant conubia elementum pellentesque morbi facilisis arcu sollicitudin diam cubilia aptent vestibulum auctor eget dapibus pellentesque inceptos leo egestas interdum nulla consectetuer suspendisse adipiscing pellentesque proin lobortis sollicitudin augue elit mus congue fermentum parturient fringilla euismod feugiat");
