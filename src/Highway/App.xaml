@@ -358,7 +358,7 @@
           <Image Source="{Binding Image}" Margin="0" Stretch="UniformToFill"/>
         </Border>
         <StackPanel Grid.Column="1" Style="{StaticResource ItemStackPanelStyle}" HorizontalAlignment="Left" Margin="12,6,0,0">
-          <TextBlock TextWrapping="Wrap" Text="{Binding Title}" Style="{StaticResource NonWrappingSmallContentTextStyle}" Width="200" Height="20"/>
+          <TextBlock TextWrapping="Wrap" Text="{Binding Name}" Style="{StaticResource NonWrappingSmallContentTextStyle}" Width="200" Height="20"/>
           <TextBlock TextWrapping="Wrap" TextTrimming="WordEllipsis" Text="{Binding Subtitle}" Style="{StaticResource SubHeaderTextStyle}" Width="200" Height="20" Margin="0,0,0,0"/>
         </StackPanel>
       </Grid>

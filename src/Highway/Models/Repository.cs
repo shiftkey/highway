@@ -59,7 +59,7 @@ namespace Highway.Models
                 if (_imageUri != value)
                 {
                     _imageUri = value;
-                    Image = null;
+                    _image = null;
                     OnPropertyChanged("ImageUri");
                     OnPropertyChanged("Image");
                 }
