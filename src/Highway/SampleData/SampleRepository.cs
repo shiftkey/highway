@@ -40,13 +40,12 @@ namespace Highway.SampleData
 
         public void Authenticate()
         {
-            throw new NotImplementedException();
+            
         }
-
 
         public bool IsAuthenticated
         {
-            get { throw new NotImplementedException(); }
+            get { return true; }
         }
     }
 }

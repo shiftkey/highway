@@ -29,6 +29,9 @@ namespace Highway
             if (_sampleData == null) 
                 _sampleData = new SampleRepository(page.BaseUri);
 
+            if (!_sampleData.IsAuthenticated)
+                _sampleData.Authenticate();
+            
             page.Items = _sampleData.GetCollaborator("").Repositories;
             Window.Current.Content = page;
         }
@@ -39,6 +42,9 @@ namespace Highway
             if (_sampleData == null)
                 _sampleData = new SampleRepository(page.BaseUri);
 
+            if (!_sampleData.IsAuthenticated)
+                _sampleData.Authenticate();
+            
             if (collection == null) 
                 collection = _sampleData.GetCollaborator("");
 
