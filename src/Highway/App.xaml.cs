@@ -27,7 +27,7 @@ namespace Highway
             var page = new CollectionPage();
 
             if (_sampleData == null) 
-                _sampleData = new GithubSampleRepository(page.BaseUri);
+                _sampleData = new SampleRepository(page.BaseUri);
 
             page.Items = _sampleData.GetCollaborator("").Repositories;
             Window.Current.Content = page;
@@ -37,7 +37,7 @@ namespace Highway
         {
             var page = new SplitPage();
             if (_sampleData == null)
-                _sampleData = new GithubSampleRepository(page.BaseUri);
+                _sampleData = new SampleRepository(page.BaseUri);
 
             if (collection == null) 
                 collection = _sampleData.GetCollaborator("");

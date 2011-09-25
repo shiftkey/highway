@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Highway.Models;
-using Windows.UI.Xaml.Media;
+using Windows.Security.Authentication.Web;
 
 namespace Highway.SampleData
 {
@@ -25,39 +21,41 @@ namespace Highway.SampleData
         {
             return new List<Commit>();
         }
+
+
+
+        public async void Authenticate()
+        {
+            var uri = new Uri("https://github.com/login/oauth/authorize?client_id=");
+
+            var response = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.Default, uri);
+
+            if (response.ResponseStatus != WebAuthenticationStatus.Success)
+            {
+                // oops
+            }
+            else
+            {
+                var text = response.ResponseData;
+                var settings = Windows.Storage.ApplicationData.Current.RoamingSettings;
+                var container = settings.CreateContainer("settings", Windows.Storage.ApplicationDataCreateDisposition.Always);
+                if (!container.Containers.ContainsKey("key"))
+                {
+                    container.Values.Add("key", text);
+                }
+                else
+                {
+                    container.Values["key"] = text;
+                }
+            }
+        }
+
+
+        public bool IsAuthenticated
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 
-    public class GithubSampleRepository : IRepository
-    {
-        private Uri _baseUrl;
-
-        public GithubSampleRepository(Uri baseUrl)
-        {
-            _baseUrl = baseUrl;
-        }
-
-        public Collaborator GetCollaborator(string user)
-        {
-            var repositories = new ObservableCollection<Repository>() { 
-                new Repository() { Name = "blog", ImageUri = new Uri(_baseUrl, "Images/github-logo.png") },
-                new Repository() { Name = "Highway" , ImageUri = new Uri(_baseUrl, "Images/github-logo.png") },
-                new Repository() { Name = "RestSharp" , ImageUri = new Uri(_baseUrl, "Images/github-logo.png") },
-                new Repository() { Name = "NSubstitute" , ImageUri = new Uri(_baseUrl, "Images/github-logo.png") },
-                new Repository() { Name = "LastThursday" , ImageUri = new Uri(_baseUrl, "Images/github-logo.png") },
-                new Repository() { Name = "Castle.Core" , ImageUri = new Uri(_baseUrl, "Images/github-logo.png") },
-                new Repository() { Name = "IOCComparison" , ImageUri = new Uri(_baseUrl, "Images/github-logo.png") },
-                new Repository() { Name = "NAppUpdate" , ImageUri = new Uri(_baseUrl, "Images/github-logo.png") },
-                new Repository() { Name = "configatron" , ImageUri = new Uri(_baseUrl, "Images/github-logo.png") },
-                new Repository() { Name = "Albacore" , ImageUri = new Uri(_baseUrl, "Images/github-logo.png") },
-                new Repository() { Name = "rhino-mocks" , ImageUri = new Uri(_baseUrl, "Images/github-logo.png") },
-            };
-
-            return new Collaborator() { Repositories = repositories };
-        }
-
-        public IEnumerable<Commit> GetCommitHistory(Repository repo)
-        {
-            return new List<Commit>();
-        }
-    }
+    
 }

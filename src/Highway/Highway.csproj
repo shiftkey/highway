@@ -43,6 +43,7 @@
     <Compile Include="Models\Repository.cs" />
     <Compile Include="SampleData\GithubRepository.cs" />
     <Compile Include="SampleData\IRepository.cs" />
+    <Compile Include="SampleData\SampleRepository.cs" />
     <Compile Include="SplitPage.xaml.cs">
       <DependentUpon>SplitPage.xaml</DependentUpon>
     </Compile>
