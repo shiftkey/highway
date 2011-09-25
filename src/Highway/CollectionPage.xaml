@@ -66,8 +66,8 @@
             <Button x:Name="BackButton" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="PageTitle" Text="{StaticResource AppName}" Style="{StaticResource PageTitleStyle}" Grid.Column="1" />
             <StackPanel Grid.Column="2" Orientation="Horizontal">
-                <TextBox x:Name="SearchTextBox" Width="200" Height="50" />
-                <Button Content="Search" />
+                <TextBox x:Name="SearchTextBox" Width="300" Height="50" />
+                <Button Content="Search" Click="DoSearch" />
             </StackPanel>
         </Grid>
 

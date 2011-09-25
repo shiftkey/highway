@@ -12,6 +12,9 @@ namespace Highway
 {
     public sealed partial class CollectionPage
     {
+        private DisplayPropertiesEventHandler _displayHandler;
+        private TypedEventHandler<ApplicationLayout, ApplicationLayoutChangedEventArgs> _layoutHandler;
+
         public CollectionPage()
         {
             InitializeComponent();
@@ -28,11 +31,7 @@ namespace Highway
         private IEnumerable<Object> _items;
         public IEnumerable<Object> Items
         {
-            get
-            {
-                return this._items;
-            }
-
+            get { return this._items; }
             set
             {
                 this._items = value;
@@ -40,10 +39,10 @@ namespace Highway
             }
         }
 
-        // View state management for switching among Full, Fill, Snapped, and Portrait states
-
-        private DisplayPropertiesEventHandler _displayHandler;
-        private TypedEventHandler<ApplicationLayout, ApplicationLayoutChangedEventArgs> _layoutHandler;
+        private void DoSearch(object sender, RoutedEventArgs e)
+        {
+            
+        }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

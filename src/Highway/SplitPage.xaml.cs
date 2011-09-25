@@ -36,7 +36,6 @@ namespace Highway
             }
             else
             {
-                // Construct the appropriate destination page and set its context appropriately
                 App.ShowCollection();
             }
         }
@@ -44,11 +43,7 @@ namespace Highway
         private Object _context;
         public Object Context
         {
-            get
-            {
-                return this._context;
-            }
-
+            get { return this._context; }
             set
             {
                 this._context = value;
@@ -59,16 +54,13 @@ namespace Highway
         private IEnumerable<Object> _items;
         public IEnumerable<Object> Items
         {
-            get
-            {
-                return this._items;
-            }
-
+            get { return this._items; }
             set
             {
                 this._items = value;
                 this.CollectionViewSource.Source = value;
-                if (!this.IsSnappedOrPortrait()) this.CollectionViewSource.View.MoveCurrentToFirst();
+                if (!this.IsSnappedOrPortrait()) 
+                    this.CollectionViewSource.View.MoveCurrentToFirst();
             }
         }
 
