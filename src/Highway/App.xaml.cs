@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Highway.SampleData;
+﻿using Highway.SampleData;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
@@ -9,7 +7,7 @@ namespace Highway
 {
     partial class App
     {
-        private static IRepository _sampleData;
+        private static IRepository _repository;
 
         public App()
         {
@@ -26,27 +24,29 @@ namespace Highway
         {
             var page = new CollectionPage();
 
-            if (_sampleData == null) 
-                _sampleData = new SampleRepository(page.BaseUri);
+            if (_repository == null)
+                // _repository = new GithubRepository(); 
+                _repository = new SampleRepository(page.BaseUri);
 
-            if (!_sampleData.IsAuthenticated)
-                _sampleData.Authenticate();
+            if (!_repository.IsAuthenticated)
+                _repository.Authenticate();
             
-            page.Items = _sampleData.GetCollaborator("").Repositories;
+            page.Items = _repository.GetCollaborator("").Repositories;
             Window.Current.Content = page;
         }
 
         public static void ShowSplit(IGroupInfo collection)
         {
             var page = new SplitPage();
-            if (_sampleData == null)
-                _sampleData = new SampleRepository(page.BaseUri);
+            if (_repository == null)
+                // _repository = new GithubRepository(); 
+                _repository = new SampleRepository(page.BaseUri);
 
-            if (!_sampleData.IsAuthenticated)
-                _sampleData.Authenticate();
+            if (!_repository.IsAuthenticated)
+                _repository.Authenticate();
             
             if (collection == null) 
-                collection = _sampleData.GetCollaborator("");
+                collection = _repository.GetCollaborator("");
 
             page.Items = collection;
             page.Context = collection.Key;

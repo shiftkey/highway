@@ -26,10 +26,11 @@ namespace Highway.SampleData
 
         public async void Authenticate()
         {
+            // TODO: test with real key
             var uri = new Uri("https://github.com/login/oauth/authorize?client_id=");
 
             var response = await WebAuthenticationBroker.AuthenticateAsync(WebAuthenticationOptions.Default, uri);
-
+            
             if (response.ResponseStatus != WebAuthenticationStatus.Success)
             {
                 // oops
@@ -53,7 +54,7 @@ namespace Highway.SampleData
 
         public bool IsAuthenticated
         {
-            get { throw new NotImplementedException(); }
+            get { return false; }
         }
     }
 

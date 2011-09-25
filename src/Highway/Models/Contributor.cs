@@ -12,6 +12,11 @@ namespace Highway.Models
         //      "url": "https://api.github.com/users/octocat"
         //    },
 
+        public Collaborator()
+        {
+            Repositories = new ObservableCollection<Repository>();
+        }
+
         public int Id { get; set; }
         public string Login { get; set; }
         public string AvatarUrl { get; set; }
