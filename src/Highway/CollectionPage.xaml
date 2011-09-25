@@ -11,8 +11,6 @@
         <CollectionViewSource x:Name="CollectionViewSource" x:Key="CollectionViewSource" />
     </UserControl.Resources>
 
-    <!-- Page Content -->
-
     <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="OrientationStates">
@@ -63,9 +61,14 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Button x:Name="BackButton" Style="{StaticResource BackButtonStyle}"/>
             <TextBlock x:Name="PageTitle" Text="{StaticResource AppName}" Style="{StaticResource PageTitleStyle}" Grid.Column="1" />
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <TextBox x:Name="SearchTextBox" Width="200" Height="50" />
+                <Button Content="Search" />
+            </StackPanel>
         </Grid>
 
         <GridView x:Name="ItemGridView" 

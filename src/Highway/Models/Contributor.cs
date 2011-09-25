@@ -3,7 +3,7 @@ using Windows.UI.Xaml.Data;
 
 namespace Highway.Models
 {
-    public class Collaborator : INotifyPropertyChanged, IGroupInfo
+    public class Collaborator : PropertyChangedBase, IGroupInfo
     {
         //    "owner": {
         //      "login": "octocat",
@@ -23,16 +23,6 @@ namespace Highway.Models
         public string Url { get; set; }
 
         public ObservableCollection<Repository> Repositories { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
 
         public object Key
         {

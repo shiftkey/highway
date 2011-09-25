@@ -47,5 +47,10 @@ namespace Highway.SampleData
         {
             get { return true; }
         }
+
+        public IEnumerable<NewsItem> GetHistory()
+        {
+            return new List<NewsItem>();
+        }
     }
 }

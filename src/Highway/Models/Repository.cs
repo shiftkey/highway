@@ -6,18 +6,8 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace Highway.Models
 {
-    public class Repository : INotifyPropertyChanged
+    public class Repository : PropertyChangedBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
         public string Name { get; set; }
         public string Description { get; set; }
         public string HomePage { get; set; }

@@ -56,6 +56,18 @@ namespace Highway.SampleData
         {
             get { return false; }
         }
+
+
+        public IEnumerable<NewsItem> GetHistory()
+        {
+            // TODO: get signed-in user
+            // TODO: generate URL for private feed
+            // TODO: parse feed to objects
+            
+            return new List<NewsItem>();
+
+            
+        }
     }
 
     

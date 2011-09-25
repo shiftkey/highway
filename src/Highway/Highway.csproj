@@ -40,9 +40,11 @@
     </Compile>
     <Compile Include="Models\Commit.cs" />
     <Compile Include="Models\Contributor.cs" />
+    <Compile Include="Models\PropertyChangedBase.cs" />
     <Compile Include="Models\Repository.cs" />
     <Compile Include="SampleData\GithubRepository.cs" />
     <Compile Include="SampleData\IRepository.cs" />
+    <Compile Include="Models\NewsItem.cs" />
     <Compile Include="SampleData\SampleRepository.cs" />
     <Compile Include="SplitPage.xaml.cs">
       <DependentUpon>SplitPage.xaml</DependentUpon>

@@ -12,6 +12,8 @@ namespace Highway.SampleData
 
         bool IsAuthenticated { get; }
 
+        IEnumerable<NewsItem> GetHistory();
+
         IEnumerable<Commit> GetCommitHistory(Repository repo);
 
         Collaborator GetCollaborator(string name);

@@ -2,16 +2,8 @@
 
 namespace Highway.Models
 {
-    public class Commit : INotifyPropertyChanged
+    public class Commit : PropertyChangedBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        
     }
 }
